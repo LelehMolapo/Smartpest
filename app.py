@@ -32,7 +32,11 @@ CONTACT_INFO = {
 app = Flask(__name__)
 app.config.from_object(Config)
 
-os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+try:
+    os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+except OSError:
+    app.config['UPLOAD_FOLDER'] = '/tmp/uploads'
+    os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
 db.init_app(app)
 
@@ -574,11 +578,16 @@ def delete_service(service_id):
 
 
 with app.app_context():
-    db.create_all()
-    bootstrap_admin()
+    try:
+        db.create_all()
+        bootstrap_admin()
+    except Exception as exc:
+        # Avoid crashing serverless cold start; check logs and DATABASE_URL config.
+        print(f'Database initialization warning: {exc}')
 
 
 if __name__ == '__main__':
     app.run(debug=True)
+
 
 
