@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}SmartPest | {{ title }}{% endblock %}
+{% block content %}
+<section class="py-5">
+    <div class="container" style="max-width: 860px;">
+        <div class="card p-4 p-md-5">
+            <h1>{{ heading }}</h1>
+            <ul class="mb-0">
+                {% for point in points %}
+                <li>{{ point }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</section>
+{% endblock %}

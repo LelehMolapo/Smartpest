@@ -1,0 +1,223 @@
+{% extends "base.html" %}
+{% block title %}SmartPest | Company{% endblock %}
+{% block content %}
+<section class="py-5 reveal delay-1">
+    <div class="container">
+        <div class="row g-4 align-items-center">
+            <div class="col-lg-6">
+                <h1 class="mb-3">Smart Pest Solutions</h1>
+                <p class="lead">
+                    Smart Pest Solutions is a proudly Basotho-owned company specializing in pest control, weed management,
+                    cleaning and disinfection, and the production and supply of ready-to-use chemical solutions.
+                </p>
+                <p>
+                    With extensive local knowledge and a commitment to environmental safety, we provide dependable services to
+                    households, businesses, and government institutions across Lesotho. We take pride in an innovative,
+                    practical approach that protects health, hygiene, and safety in every environment we serve.
+                </p>
+            </div>
+            <div class="col-lg-6">
+                <figure class="image-with-caption mb-0">
+                    <img class="company-section-image" src="{{ url_for('static', filename='images/company-hero.jpg') }}" alt="Smart Pest Solutions team at work">
+                    <figcaption>Dedicated Smart Pest Solutions team in the field.</figcaption>
+                </figure>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="pb-4 reveal delay-2">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="card p-4 h-100">
+                    <h2 class="h4">Our Mission</h2>
+                    <p class="mb-0">
+                        To provide effective, safe, and sustainable pest control and hygiene solutions through quality
+                        service, trusted products, and professional expertise, improving the well-being of our clients
+                        and communities.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <figure class="image-with-caption mb-0 h-100">
+                    <img class="company-section-image h-100" src="{{ url_for('static', filename='images/mission-vision.jpg') }}" alt="Professional team planning and inspection">
+                    <figcaption>Planning and inspection for safe, effective execution.</figcaption>
+                </figure>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="pb-4 reveal delay-3">
+    <div class="container">
+        <div class="card p-4">
+            <h2 class="h4">Our Team</h2>
+            <p class="mb-0">
+                We are driven by skilled professionals who are passionate about excellence. From technicians to
+                chemical handlers and customer support personnel, every team member is committed to high-quality
+                service with integrity, attention to detail, and a strong safety culture.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="pb-4 reveal delay-4">
+    <div class="container">
+        <div class="card p-4">
+            <h2 class="h4">Our Core Values</h2>
+            <ol class="mb-0">
+                <li><strong>Integrity:</strong> We are honest and ethical in everything we do.</li>
+                <li><strong>Excellence:</strong> We pursue quality, professionalism, and continuous improvement.</li>
+                <li><strong>Customer Focus:</strong> We build lasting relationships by meeting and exceeding expectations.</li>
+                <li><strong>Safety:</strong> We prioritize the health of our clients, team, and environment.</li>
+                <li><strong>Innovation:</strong> We embrace new technologies and methods to deliver better solutions.</li>
+            </ol>
+        </div>
+    </div>
+</section>
+
+<section class="pb-4 reveal delay-5">
+    <div class="container">
+        <h2 class="h4 mb-3">What We Do</h2>
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="card p-4 h-100">
+                    <h3 class="h5">Pest Control Services</h3>
+                    <figure class="image-with-caption mb-3">
+                        <img class="service-image" src="{{ url_for('static', filename='images/pest-control.jpg') }}" alt="Pest control technician treatment setup">
+                        <figcaption>Precision treatment and bait station setup.</figcaption>
+                    </figure>
+                    <ul class="mb-0">
+                        <li>Residential and commercial pest control programs</li>
+                        <li>Rodent, cockroach, termite, and ant treatment</li>
+                        <li>Fly, wasp, gulls and bird control, and mosquito control</li>
+                        <li>Seasonal programs: Summer, Fall, Winter, and Spring</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card p-4 h-100">
+                    <h3 class="h5">Cleaning and Disinfection</h3>
+                    <figure class="image-with-caption mb-3">
+                        <img class="service-image" src="{{ url_for('static', filename='images/disinfection.jpg') }}" alt="Cleaning and disinfection with PPE">
+                        <figcaption>Professional disinfection with proper PPE.</figcaption>
+                    </figure>
+                    <ul class="mb-0">
+                        <li>Post-construction cleaning</li>
+                        <li>High-touch surface disinfection, including COVID-19 protocols</li>
+                        <li>Deep cleaning and sanitization for schools, clinics, and businesses</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card p-4 h-100">
+                    <h3 class="h5">Weed Management</h3>
+                    <figure class="image-with-caption mb-3">
+                        <img class="service-image" src="{{ url_for('static', filename='images/weed-management.jpg') }}" alt="Weed management and herbicide application">
+                        <figcaption>Targeted weed control for open grounds and lawns.</figcaption>
+                    </figure>
+                    <ul class="mb-0">
+                        <li>Herbicide application for lawns, pavements, and open grounds</li>
+                        <li>Agricultural and industrial weed treatment solutions</li>
+                        <li>Treatment of tree growth, broadleaf, annual, and perennial weeds</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card p-4 h-100">
+                    <h3 class="h5">Ready-to-Use Chemical Solutions</h3>
+                    <figure class="image-with-caption mb-3">
+                        <img class="service-image" src="{{ url_for('static', filename='images/chemical-solutions.jpg') }}" alt="Ready-to-use chemical products">
+                        <figcaption>Reliable, ready-to-use product range.</figcaption>
+                    </figure>
+                    <ul class="mb-0">
+                        <li>Rodenticides in ready-to-use bait packs</li>
+                        <li>Herbicides for broadleaf and grass weeds</li>
+                        <li>Indoor and outdoor insecticides</li>
+                        <li>Full pit toilet chemicals for waste breakdown and smell reduction</li>
+                        <li>Toilet odor-control and freshness-boosting chemical solutions</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="pb-4 reveal delay-6">
+    <div class="container">
+        <div class="card p-4">
+            <h2 class="h4">Service Approach</h2>
+            <ol class="mb-0">
+                <li>Before service begins, we evaluate each client's environment and challenge areas.</li>
+                <li>Our trained inspectors identify infestation sources, breeding areas, and hygiene gaps.</li>
+                <li>We provide a treatment plan covering applied solutions, safety guidance, and schedules.</li>
+                <li>We maintain relationships through communication, periodic reviews, and service feedback.</li>
+                <li>
+                    We run seasonal response plans:
+                    Summer for insect and rodent control, Fall for prevention and baiting, Winter for indoor
+                    monitoring and treatment, and Spring for lawn care, weed control, and pest barrier application.
+                </li>
+            </ol>
+        </div>
+    </div>
+</section>
+
+<section class="pb-4 reveal delay-7">
+    <div class="container">
+        <div class="card p-4">
+            <h2 class="h4">Client Incentives and Support</h2>
+            <ul class="mb-0">
+                <li>
+                    Free pest control services at the homes of key client personnel during active service contracts.
+                </li>
+                <li>Priority scheduling and a dedicated support line for fast response.</li>
+                <li>On-site awareness and safety training for staff to promote hygiene and pest prevention.</li>
+                <li>Monthly performance reviews to track outcomes and improve service quality.</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section class="pb-4 reveal delay-8">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-7">
+                <div class="card p-4 h-100">
+                    <h2 class="h4">Health and Safety Standards</h2>
+                    <ul class="mb-0">
+                        <li>We avoid indoor liquid chemicals where they may risk health or damage equipment and furniture.</li>
+                        <li>We prioritize safer methods such as baiting and fogging to minimize exposure.</li>
+                        <li>We use indoor bait stations for controlled, safe, and long-lasting rodenticide application.</li>
+                        <li>Our team uses PPE at all times during chemical handling and service delivery.</li>
+                        <li>We provide MSDS documentation for chemicals used to ensure transparency and awareness.</li>
+                        <li>Treated areas are clearly marked, and clients are guided on safe re-entry times.</li>
+                        <li>We follow proper storage, transport, and disposal practices under national regulations.</li>
+                        <li>Staff receive regular training on safety protocols and pest control legislation updates.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <figure class="image-with-caption mb-0 h-100">
+                    <img class="company-section-image h-100" src="{{ url_for('static', filename='images/health-safety.jpg') }}" alt="Health and safety standards in pest control operations">
+                    <figcaption>Safety-first operations and controlled application.</figcaption>
+                </figure>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="pb-5 reveal delay-9">
+    <div class="container">
+        <div class="card p-4">
+            <h2 class="h4">Contacts</h2>
+            <p class="mb-1"><strong>Call:</strong> {{ contact.phone_display }}</p>
+            <p class="mb-1"><strong>WhatsApp:</strong> {{ contact.whatsapp_display }}</p>
+            <p class="mb-1"><strong>Email:</strong> {{ contact.email }}</p>
+            <p class="mb-1"><strong>Facebook:</strong> {{ contact.facebook }}</p>
+            <p class="mb-1"><strong>Instagram:</strong> {{ contact.instagram }}</p>
+            <p class="mb-0"><strong>X:</strong> {{ contact.x }}</p>
+        </div>
+    </div>
+</section>
+{% endblock %}

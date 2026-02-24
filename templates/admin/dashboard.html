@@ -1,0 +1,137 @@
+﻿{% extends "base.html" %}
+{% block title %}Admin Dashboard{% endblock %}
+{% block content %}
+<section class="py-4 admin-page">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2 admin-header">
+            <h1 class="h3 mb-0">Dashboard</h1>
+            <div class="d-flex gap-2">
+                <a class="btn btn-success" href="{{ url_for('add_product') }}">Add Product</a>
+                <a class="btn btn-outline-success" href="{{ url_for('add_service') }}">Add Service</a>
+                <a class="btn btn-outline-dark" href="{{ url_for('admin_leads') }}">View Leads</a>
+            </div>
+        </div>
+
+        <div class="row g-3 mb-4">
+            <div class="col-md-3">
+                <div class="card p-3 admin-card stat-card">
+                    <h6 class="text-muted stat-label">Total Products</h6>
+                    <h2 class="stat-value">{{ product_count }}</h2>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card p-3 admin-card stat-card">
+                    <h6 class="text-muted stat-label">Total Services</h6>
+                    <h2 class="stat-value">{{ service_count }}</h2>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card p-3 admin-card stat-card">
+                    <h6 class="text-muted stat-label">Quote Requests</h6>
+                    <h2 class="stat-value">{{ quote_count }}</h2>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card p-3 admin-card stat-card">
+                    <h6 class="text-muted stat-label">Subscribers</h6>
+                    <h2 class="stat-value">{{ subscriber_count }}</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="card p-3 mb-4 admin-card">
+            <h5 class="mb-3 admin-section-title">Recent Quote Requests</h5>
+            <div class="table-responsive">
+                <table class="table align-middle admin-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>Location</th>
+                            <th>Service</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for quote in recent_quotes %}
+                        <tr>
+                            <td>{{ quote.full_name }}</td>
+                            <td>{{ quote.phone }}</td>
+                            <td>{{ quote.location }}</td>
+                            <td>{{ quote.service_type }}</td>
+                            <td>{{ quote.created_at.strftime('%Y-%m-%d') }}</td>
+                        </tr>
+                        {% else %}
+                        <tr><td colspan="5">No quote requests yet.</td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card p-3 mb-4 admin-card">
+            <h5 class="mb-3 admin-section-title">Products</h5>
+            <div class="table-responsive">
+                <table class="table align-middle admin-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Created</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for product in Product.query.order_by(Product.created_at.desc()).all() %}
+                        <tr>
+                            <td>{{ product.name }}</td>
+                            <td>{% if product.price is not none %}M {{ '%.2f'|format(product.price) }}{% else %}-{% endif %}</td>
+                            <td>{{ product.created_at.strftime('%Y-%m-%d') }}</td>
+                            <td class="text-end">
+                                <a class="btn btn-sm btn-outline-primary" href="{{ url_for('edit_product', product_id=product.id) }}">Edit</a>
+                                <form class="d-inline" method="post" action="{{ url_for('delete_product', product_id=product.id) }}" onsubmit="return confirm('Delete this product?');">
+                                    <button class="btn btn-sm btn-outline-danger" type="submit">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr><td colspan="4">No products yet.</td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card p-3 admin-card">
+            <h5 class="mb-3 admin-section-title">Services</h5>
+            <div class="table-responsive">
+                <table class="table align-middle admin-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Created</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for service in Service.query.order_by(Service.created_at.desc()).all() %}
+                        <tr>
+                            <td>{{ service.name }}</td>
+                            <td>{{ service.created_at.strftime('%Y-%m-%d') }}</td>
+                            <td class="text-end">
+                                <a class="btn btn-sm btn-outline-primary" href="{{ url_for('edit_service', service_id=service.id) }}">Edit</a>
+                                <form class="d-inline" method="post" action="{{ url_for('delete_service', service_id=service.id) }}" onsubmit="return confirm('Delete this service?');">
+                                    <button class="btn btn-sm btn-outline-danger" type="submit">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr><td colspan="3">No services yet.</td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

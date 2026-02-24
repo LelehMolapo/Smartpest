@@ -1,0 +1,26 @@
+﻿{% extends "base.html" %}
+{% block title %}SmartPest | Services{% endblock %}
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <h1 class="mb-4">Our Services</h1>
+        <div class="row g-4">
+            {% for service in services %}
+            <div class="col-md-4">
+                <div class="card h-100">
+                    {% if service.image %}
+                    <img src="{{ url_for('static', filename='uploads/' ~ service.image) }}" class="card-img-top" alt="{{ service.name }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ service.name }}</h5>
+                        <p class="card-text">{{ service.description or 'No description yet.' }}</p>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <p>No services available yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

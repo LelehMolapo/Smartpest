@@ -1,0 +1,23 @@
+﻿{% extends "base.html" %}
+{% block title %}Admin Login{% endblock %}
+{% block content %}
+<section class="py-5">
+    <div class="container" style="max-width: 480px;">
+        <div class="card p-4">
+            <h1 class="h3 mb-3">Admin Login</h1>
+            <form method="post">
+                <div class="mb-3">
+                    <label class="form-label" for="username">Username</label>
+                    <input class="form-control" type="text" id="username" name="username" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="password">Password</label>
+                    <input class="form-control" type="password" id="password" name="password" required>
+                </div>
+                <button class="btn btn-success w-100" type="submit">Log In</button>
+            </form>
+            <small class="text-muted mt-3">Default credentials: admin / admin123</small>
+        </div>
+    </div>
+</section>
+{% endblock %}

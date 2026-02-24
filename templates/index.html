@@ -1,0 +1,148 @@
+﻿{% extends "base.html" %}
+{% block title %}SmartPest | Home{% endblock %}
+{% block content %}
+<section class="hero-section py-5">
+    <div class="container">
+        <div class="row align-items-center g-4">
+            <div class="col-lg-7">
+                <h1 class="display-5 fw-bold">Trusted Pest Control Solutions in Lesotho</h1>
+                <p class="lead mt-3">We help homes and businesses stay safe with quality pest control products and reliable on-site services.</p>
+                <div class="d-flex gap-2 flex-wrap mt-3">
+                    <a class="btn btn-dark btn-lg" href="{{ url_for('company') }}">About Smart Pest Solutions</a>
+                    <a class="btn btn-success btn-lg" href="{{ url_for('products') }}">Browse Products</a>
+                    <a class="btn btn-outline-success btn-lg" href="{{ url_for('services') }}">View Services</a>
+                    <a class="btn btn-accent btn-lg" href="{{ url_for('request_quote') }}">Request Free Quote</a>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="hero-card p-4">
+                    <h5 class="fw-semibold">Quick Contact</h5>
+                    <p class="mb-1">Call: {{ contact.phone_display }}</p>
+                    <p class="mb-1">WhatsApp: {{ contact.whatsapp_display }}</p>
+                    <p class="mb-3">{{ contact.email }}</p>
+                    <a class="btn btn-success w-100" href="https://wa.me/{{ contact.whatsapp_number }}" target="_blank" rel="noopener">Open WhatsApp</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-4">
+    <div class="container">
+        <div class="trust-strip">
+            <div><strong>Basotho-Owned</strong><span>Local expertise, national reach</span></div>
+            <div><strong>Safety First</strong><span>PPE, MSDS, controlled application</span></div>
+            <div><strong>Fast Response</strong><span>Priority scheduling for urgent cases</span></div>
+            <div><strong>Integrated Solutions</strong><span>Pest, weed, hygiene, chemicals</span></div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        <h2 class="mb-4">Recent Products</h2>
+        <div class="row g-4">
+            {% for product in recent_products %}
+            <div class="col-md-4">
+                <div class="card h-100">
+                    {% if product.image %}
+                    <img src="{{ url_for('static', filename='uploads/' ~ product.image) }}" class="card-img-top" alt="{{ product.name }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text">{{ product.description or 'No description yet.' }}</p>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <p>No products yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="pb-5">
+    <div class="container">
+        <h2 class="mb-4">Recent Services</h2>
+        <div class="row g-4">
+            {% for service in recent_services %}
+            <div class="col-md-4">
+                <div class="card h-100">
+                    {% if service.image %}
+                    <img src="{{ url_for('static', filename='uploads/' ~ service.image) }}" class="card-img-top" alt="{{ service.name }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ service.name }}</h5>
+                        <p class="card-text">{{ service.description or 'No description yet.' }}</p>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <p>No services yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="pb-5">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-6">
+                <div class="card p-4 h-100">
+                    <h2 class="h4 mb-3">How Our Service Works</h2>
+                    <ol class="mb-0">
+                        <li>Inspection and risk assessment.</li>
+                        <li>Clear treatment and safety plan.</li>
+                        <li>Professional implementation.</li>
+                        <li>Follow-up review and prevention guidance.</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card p-4 h-100">
+                    <h2 class="h4 mb-3">Frequently Asked Questions</h2>
+                    <div class="accordion" id="homeFaq">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">How quickly can you respond?</button>
+                            </h2>
+                            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#homeFaq">
+                                <div class="accordion-body">Most requests are acknowledged the same day, with urgent infestations prioritized.</div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">Do you serve both homes and businesses?</button>
+                            </h2>
+                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#homeFaq">
+                                <div class="accordion-body">Yes. We support residential, commercial, institutional, and government sites.</div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">Are treatments safe?</button>
+                            </h2>
+                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#homeFaq">
+                                <div class="accordion-body">We use controlled methods, provide guidance on re-entry timing, and follow strict safety standards.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="pb-5">
+    <div class="container">
+        <div class="card p-4 text-center cta-band">
+            <h2 class="h3 mb-2">Ready to Protect Your Property?</h2>
+            <p class="mb-3">Get a tailored pest and hygiene plan for your home, business, or institution.</p>
+            <div class="d-flex justify-content-center flex-wrap gap-2">
+                <a class="btn btn-accent btn-lg" href="{{ url_for('request_quote') }}">Request a Quote</a>
+                <a class="btn btn-outline-dark btn-lg" href="https://wa.me/{{ contact.whatsapp_number }}" target="_blank" rel="noopener">Chat on WhatsApp</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,35 @@
+﻿{% extends "base.html" %}
+{% block title %}Edit Service{% endblock %}
+{% block content %}
+<section class="py-5 admin-page">
+    <div class="container" style="max-width: 760px;">
+        <div class="card p-4 admin-card admin-form-card">
+            <h1 class="h3 mb-2">Edit Service</h1>
+            <p class="admin-subtitle">Update service details and image with one clean form.</p>
+            <form method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label class="form-label" for="name">Name</label>
+                    <input class="form-control" type="text" id="name" name="name" value="{{ service.name }}" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="description">Description</label>
+                    <textarea class="form-control" id="description" name="description" rows="4">{{ service.description or '' }}</textarea>
+                </div>
+                {% if service.image %}
+                <div class="mb-3">
+                    <img src="{{ url_for('static', filename='uploads/' ~ service.image) }}" alt="{{ service.name }}" class="preview-img">
+                </div>
+                {% endif %}
+                <div class="mb-4">
+                    <label class="form-label" for="image">Replace Image</label>
+                    <input class="form-control" type="file" id="image" name="image" accept=".png,.jpg,.jpeg,.gif,.webp">
+                </div>
+                <div class="d-flex gap-2">
+                    <button class="btn btn-success" type="submit">Update Service</button>
+                    <a class="btn btn-outline-secondary" href="{{ url_for('admin_dashboard') }}">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

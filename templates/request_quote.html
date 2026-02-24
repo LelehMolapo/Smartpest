@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}SmartPest | Request Quote{% endblock %}
+{% block content %}
+<section class="py-5">
+    <div class="container" style="max-width: 860px;">
+        <div class="card p-4 p-md-5">
+            <h1 class="mb-2">Request a Quote</h1>
+            <p class="text-muted mb-4">Tell us about your site and challenge. We will contact you with a practical solution and schedule.</p>
+            <form method="post" class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label" for="full_name">Full Name *</label>
+                    <input class="form-control" id="full_name" name="full_name" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label" for="phone">Phone *</label>
+                    <input class="form-control" id="phone" name="phone" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label" for="email">Email</label>
+                    <input class="form-control" id="email" name="email" type="email">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label" for="location">Location / Area *</label>
+                    <input class="form-control" id="location" name="location" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label" for="property_type">Property Type *</label>
+                    <select class="form-select" id="property_type" name="property_type" required>
+                        <option value="">Choose...</option>
+                        <option>Residential</option>
+                        <option>Commercial</option>
+                        <option>School / Clinic</option>
+                        <option>Industrial / Agricultural</option>
+                        <option>Government Facility</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label" for="service_type">Service Needed *</label>
+                    <select class="form-select" id="service_type" name="service_type" required>
+                        <option value="">Choose...</option>
+                        <option>Pest Control</option>
+                        <option>Weed Management</option>
+                        <option>Cleaning and Disinfection</option>
+                        <option>Chemical Supply</option>
+                        <option>Integrated Service Plan</option>
+                    </select>
+                </div>
+                <div class="col-12">
+                    <label class="form-label" for="message">Brief Description</label>
+                    <textarea class="form-control" id="message" name="message" rows="5" placeholder="Describe infestation signs, frequency, affected areas, and urgency."></textarea>
+                </div>
+                <div class="col-12 d-flex flex-wrap gap-2">
+                    <button class="btn btn-accent btn-lg" type="submit">Send Request</button>
+                    <a class="btn btn-outline-secondary btn-lg" href="https://wa.me/{{ contact.whatsapp_number }}" target="_blank" rel="noopener">Prefer WhatsApp</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

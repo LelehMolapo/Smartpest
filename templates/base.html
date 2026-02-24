@@ -1,0 +1,248 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}SmartPest{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-success shadow-sm">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="{{ url_for('index') }}">SmartPest</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mainNav">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('company') }}">Company</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('products') }}">Products</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('services') }}">Services</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('request_quote') }}">Request Quote</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('contact') }}">Contact</a></li>
+                {% if current_user.is_authenticated %}
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('admin_dashboard') }}">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('admin_leads') }}">Leads</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('admin_logout') }}">Logout</a></li>
+                {% else %}
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('admin_login') }}">Admin</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<main class="py-4">
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+    {% block content %}{% endblock %}
+</main>
+
+{% if not request.path.startswith('/admin') %}
+<section class="chatbot-widget" id="chatbotWidget">
+    <button type="button" class="chatbot-launcher" id="chatbotLauncher" aria-label="Open help desk chat">
+        <i class="bi bi-chat-dots-fill"></i>
+        <span>Help Desk</span>
+    </button>
+    <div class="chatbot-panel d-none" id="chatbotPanel">
+        <div class="chatbot-header">
+            <div>
+                <strong>SmartPest Help Desk</strong>
+                <small>Ask me anything about pest control</small>
+            </div>
+            <button type="button" class="btn-close btn-close-white" id="chatbotClose" aria-label="Close chat"></button>
+        </div>
+        <div class="chatbot-body" id="chatbotBody">
+            <div class="chat-msg bot">
+                Hello, I am your Smart Pest assistant. Ask about pests, treatment safety, prevention, pricing, or service booking.
+            </div>
+        </div>
+        <div class="chatbot-suggestions" id="chatbotSuggestions"></div>
+        <form class="chatbot-input" id="chatbotForm">
+            <input id="chatbotText" type="text" class="form-control" placeholder="Type your question..." autocomplete="off" required>
+            <button type="submit" class="btn btn-success">Send</button>
+        </form>
+    </div>
+</section>
+{% endif %}
+
+<footer class="site-footer py-5 mt-5">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <h5 class="footer-heading">Quick Links</h5>
+                <ul class="footer-links list-unstyled mb-0">
+                    <li><a href="{{ url_for('company') }}">About Smart Pest Solutions</a></li>
+                    <li><a href="{{ url_for('promotions') }}">Promotions</a></li>
+                    <li><a href="{{ url_for('video_gallery') }}">Video Gallery</a></li>
+                    <li><a href="{{ url_for('blog') }}">Blog</a></li>
+                    <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
+                    <li><a href="{{ url_for('request_quote') }}">Request a Quote</a></li>
+                    <li><a href="{{ url_for('terms_and_conditions') }}">Terms & Conditions</a></li>
+                    <li><a href="{{ url_for('privacy_policy') }}">Privacy Policy</a></li>
+                    <li><a href="{{ url_for('cookie_policy') }}">Cookie Policy</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-4">
+                <h5 class="footer-heading">Sign Up For Exclusive Deals</h5>
+                <form method="post" action="{{ url_for('subscribe') }}" class="d-flex flex-column gap-2 mb-4">
+                    <input class="form-control form-control-lg" type="email" name="email" placeholder="Email address" required>
+                    <button class="btn btn-accent btn-lg" type="submit">Subscribe</button>
+                </form>
+                <h5 class="footer-heading">Stay Connected</h5>
+                <div class="social-icons">
+                    <a class="social-icon" href="{{ contact.facebook_url }}" aria-label="Facebook" title="Facebook"><i class="bi bi-facebook"></i></a>
+                    <a class="social-icon" href="{{ contact.youtube_url }}" aria-label="YouTube" title="YouTube"><i class="bi bi-youtube"></i></a>
+                    <a class="social-icon" href="{{ contact.instagram_url }}" aria-label="Instagram" title="Instagram"><i class="bi bi-instagram"></i></a>
+                    <a class="social-icon" href="{{ contact.x_url }}" aria-label="X" title="X"><i class="bi bi-twitter-x"></i></a>
+                </div>
+                <div class="small mt-3">
+                    <div><strong>Call:</strong> <a href="tel:{{ contact.phone_tel }}">{{ contact.phone_display }}</a></div>
+                    <div><strong>WhatsApp:</strong> <a href="https://wa.me/{{ contact.whatsapp_number }}">{{ contact.whatsapp_display }}</a></div>
+                    <div><strong>Email:</strong> <a href="mailto:{{ contact.email }}">{{ contact.email }}</a></div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <h5 class="footer-heading">Useful Info</h5>
+                <div class="accordion footer-accordion" id="footerInfo">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="noteHead">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#noteCollapse">
+                                Please Note
+                            </button>
+                        </h2>
+                        <div id="noteCollapse" class="accordion-collapse collapse" data-bs-parent="#footerInfo">
+                            <div class="accordion-body">No online payments are required. We confirm services and pricing directly after assessment.</div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="bookingHead">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#bookingCollapse">
+                                Booking and Service
+                            </button>
+                        </h2>
+                        <div id="bookingCollapse" class="accordion-collapse collapse" data-bs-parent="#footerInfo">
+                            <div class="accordion-body">Priority scheduling is available for contracted clients, institutions, and urgent infestations.</div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="safetyHead">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#safetyCollapse">
+                                Safety and Chemicals
+                            </button>
+                        </h2>
+                        <div id="safetyCollapse" class="accordion-collapse collapse" data-bs-parent="#footerInfo">
+                            <div class="accordion-body">MSDS is available on request. We apply controlled methods to protect people, assets, and environments.</div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="contactHead">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#contactCollapse">
+                                Contact
+                            </button>
+                        </h2>
+                        <div id="contactCollapse" class="accordion-collapse collapse" data-bs-parent="#footerInfo">
+                            <div class="accordion-body">Call {{ contact.phone_display }}, WhatsApp {{ contact.whatsapp_display }}, or email {{ contact.email }}.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom small mt-4 pt-3 border-top border-light-subtle">
+            <span>&copy; 2026 Smart Pest Solutions. All rights reserved.</span>
+        </div>
+    </div>
+</footer>
+
+<a class="whatsapp-float" href="https://wa.me/{{ contact.whatsapp_number }}" target="_blank" rel="noopener">WhatsApp</a>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+{% if not request.path.startswith('/admin') %}
+<script>
+(() => {
+    const launcher = document.getElementById('chatbotLauncher');
+    const panel = document.getElementById('chatbotPanel');
+    const closeBtn = document.getElementById('chatbotClose');
+    const form = document.getElementById('chatbotForm');
+    const input = document.getElementById('chatbotText');
+    const body = document.getElementById('chatbotBody');
+    const suggestionsWrap = document.getElementById('chatbotSuggestions');
+    const defaultSuggestions = {{ chatbot_suggestions|tojson }};
+
+    if (!launcher || !panel || !form || !input || !body || !suggestionsWrap) return;
+
+    const addMessage = (text, side = 'bot') => {
+        const bubble = document.createElement('div');
+        bubble.className = `chat-msg ${side}`;
+        bubble.textContent = text;
+        body.appendChild(bubble);
+        body.scrollTop = body.scrollHeight;
+    };
+
+    const setSuggestions = (items) => {
+        suggestionsWrap.innerHTML = '';
+        (items || []).slice(0, 5).forEach((item) => {
+            const chip = document.createElement('button');
+            chip.type = 'button';
+            chip.className = 'chat-suggestion';
+            chip.textContent = item;
+            chip.addEventListener('click', () => {
+                input.value = item;
+                form.requestSubmit();
+            });
+            suggestionsWrap.appendChild(chip);
+        });
+    };
+
+    const togglePanel = (show) => {
+        panel.classList.toggle('d-none', !show);
+        if (show) input.focus();
+    };
+
+    launcher.addEventListener('click', () => togglePanel(true));
+    closeBtn?.addEventListener('click', () => togglePanel(false));
+    setSuggestions(defaultSuggestions);
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const message = input.value.trim();
+        if (!message) return;
+
+        addMessage(message, 'user');
+        input.value = '';
+
+        try {
+            const res = await fetch('{{ url_for("chatbot_message") }}', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({message})
+            });
+
+            const data = await res.json();
+            addMessage(data.reply || 'I could not process that right now. Please try again.', 'bot');
+            setSuggestions(data.suggestions || defaultSuggestions);
+        } catch (err) {
+            addMessage('Network issue. Please retry or contact us on WhatsApp for immediate help.', 'bot');
+        }
+    });
+})();
+</script>
+{% endif %}
+</body>
+</html>

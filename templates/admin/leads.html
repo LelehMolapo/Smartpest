@@ -1,0 +1,75 @@
+﻿{% extends "base.html" %}
+{% block title %}Admin Leads{% endblock %}
+{% block content %}
+<section class="py-4 admin-page">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2 admin-header">
+            <h1 class="h3 mb-0">Leads and Subscribers</h1>
+            <div class="d-flex gap-2">
+                <a class="btn btn-outline-secondary" href="{{ url_for('admin_dashboard') }}">Back to Dashboard</a>
+                <a class="btn btn-accent" href="{{ url_for('export_leads_pdf') }}">Download PDF</a>
+            </div>
+        </div>
+
+        <div class="card p-3 mb-4 admin-card">
+            <h5 class="mb-3 admin-section-title">Quote Requests ({{ quotes|length }})</h5>
+            <div class="table-responsive">
+                <table class="table align-middle admin-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                            <th>Location</th>
+                            <th>Property</th>
+                            <th>Service</th>
+                            <th>Message</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for quote in quotes %}
+                        <tr>
+                            <td>{{ quote.created_at.strftime('%Y-%m-%d') }}</td>
+                            <td>{{ quote.full_name }}</td>
+                            <td>{{ quote.phone }}</td>
+                            <td>{{ quote.email or '-' }}</td>
+                            <td>{{ quote.location }}</td>
+                            <td>{{ quote.property_type }}</td>
+                            <td>{{ quote.service_type }}</td>
+                            <td>{{ quote.message or '-' }}</td>
+                        </tr>
+                        {% else %}
+                        <tr><td colspan="8">No quote requests yet.</td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card p-3 admin-card">
+            <h5 class="mb-3 admin-section-title">Newsletter Subscribers ({{ subscribers|length }})</h5>
+            <div class="table-responsive">
+                <table class="table align-middle admin-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for subscriber in subscribers %}
+                        <tr>
+                            <td>{{ subscriber.created_at.strftime('%Y-%m-%d') }}</td>
+                            <td>{{ subscriber.email }}</td>
+                        </tr>
+                        {% else %}
+                        <tr><td colspan="2">No subscribers yet.</td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
